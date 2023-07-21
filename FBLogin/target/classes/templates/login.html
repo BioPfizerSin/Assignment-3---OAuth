@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http:/www.thymeleaf.org">
+<head th:replace="fragments :: html_head(pageTitle='Login')" />
+<body>
+
+	<!-- main section -->
+	<div class="mt-5 container shadow-lg p-3 mb-5 bg-white rounded"
+		style="width: 50vh; margin: auto;">
+		<div class="container-fluid text-center">
+			<h3 style="font-weight: bold;">Log In</h3>
+			<hr class="divider pt-2 rounded">
+		</div>
+		<form th:action="@{/login}" method="post"
+			style="max-width: 400px; margin: 0 auto;">
+
+			<input type="hidden" name="${_csrf.parameterName}"
+				value="${_csrf.token}" />
+
+
+			<div class="form-group p-2">
+				<label for="email">Email address</label> <input type="email"
+					class="form-control mt-1" name="email" id="email"
+					aria-describedby="emailHelp" placeholder="Enter email" required>
+				<small id="emailHelp" class="form-text text-muted">We'll
+					never share your email with anyone else.</small>
+			</div>
+
+			<div class="form-group mb-2 p-2">
+				<label for="password">Password</label> <input type="password"
+					class="form-control mt-1" name="pass" id="password"
+					placeholder="Enter Password">
+				<div class="text-right">
+					<small><a href="" class="alert-link text-muted"
+						style="text-decoration: none;">Forgot you password?</a></small>
+				</div>
+			</div>
+
+
+			<div class="text-right p-2">
+				<button type="submit" class="btn btn-primary container-fluid">Submit</button>
+			</div>
+
+			<div th:if="${param.error}">
+				<p class="text-danger">Invalid username or password.</p>
+			</div>
+			<div th:if="${param.logout}">
+				<p class="text-warning">You have been logged out.</p>
+			</div>
+
+		</form>
+		<div class="container-fluid text-center">
+			<hr>
+			<small>Don't have an account? <a href="/signup"
+				class="text-muted">Sign Up Now</a></small>
+		</div>
+		<div class="container-fluid text-center">
+			<hr>
+			<small><a th:href="@{/oauth2/authorization/facebook}" class="btn btn-secondary container-fluid">Login with Facebook</a></small>
+		</div>
+		<div class="container-fluid text-center">
+			<hr>
+			<small><a th:href="@" class="btn btn-danger container-fluid">Login with Google</a></small>
+		</div>
+	</div>
+</body>
+</html>
